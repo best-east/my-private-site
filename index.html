@@ -2,15 +2,61 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>松田さんのサイト</title>
+<title>会員専用サイト</title>
+
+<script>
+function checkPassword() {
+    const password = document.getElementById("password").value;
+
+    if (password === "kanazawa2026") {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("content").style.display = "block";
+    } else {
+        alert("パスワードが違います");
+    }
+}
+</script>
+
+<style>
+body {
+    font-family: sans-serif;
+    text-align: center;
+    margin-top: 100px;
+}
+
+#content {
+    display: none;
+}
+</style>
+
 </head>
 <body>
 
-<h1>ようこそ</h1>
+<div id="login">
+    <h1>会員専用サイト</h1>
 
-<p>
-これは私の最初のWebサイトです。
-</p>
+    <p>
+        パスワードを入力してください
+    </p>
+
+    <input type="password" id="password">
+
+    <button onclick="checkPassword()">
+        ログイン
+    </button>
+</div>
+
+<div id="content">
+    <h1>ようこそ</h1>
+
+    <p>
+        認証に成功しました。
+    </p>
+
+    <p>
+        ここに会員向け情報を掲載できます。
+    </p>
+</div>
 
 </body>
 </html>
