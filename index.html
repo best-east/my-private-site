@@ -2,8 +2,8 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>会員専用サイト</title>
-
 <script>
 function checkPassword() {
     const password = document.getElementById("password").value;
@@ -18,21 +18,61 @@ function checkPassword() {
 </script>
 
 <style>
+
 body {
     font-family: sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
     text-align: center;
-    margin-top: 100px;
+}
+
+h1 {
+    color: #003366;
+}
+
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #0066cc;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0050a0;
 }
 
 #content {
     display: none;
 }
+
 </style>
 
 </head>
 <body>
 
-<div id="login">
+<div id="login" class="container">
     <h1>会員専用サイト</h1>
 
     <p>
@@ -46,7 +86,7 @@ body {
     </button>
 </div>
 
-<div id="content">
+<div id="content" class="container">
     <h1>ようこそ</h1>
 
     <p>
