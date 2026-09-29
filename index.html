@@ -24,6 +24,7 @@ function checkPassword() {
         alert("パスワードが違います");
 
     }
+
 }
 
 function calcDate() {
@@ -76,12 +77,7 @@ function calcDate() {
     if (daysUntilSeminar < 0) {
 
         message +=
-            "<div style='background:#eeeeee;" +
-            "border-left:8px solid #666666;" +
-            "padding:15px;" +
-            "font-size:20px;" +
-            "font-weight:bold;" +
-            "color:#666666;'>" +
+            "<div class='status-gray'>" +
             "このセミナーは既に終了しています。" +
             "</div>";
 
@@ -90,12 +86,7 @@ function calcDate() {
     else if (daysUntilApplicationStart > 0) {
 
         message +=
-            "<div style='background:#eeeeee;" +
-            "border-left:8px solid #666666;" +
-            "padding:15px;" +
-            "font-size:20px;" +
-            "font-weight:bold;" +
-            "color:#666666;'>" +
+            "<div class='status-gray'>" +
             "このセミナーの申込期間前です。<br>" +
             "申込開始まであと " +
             daysUntilApplicationStart +
@@ -107,13 +98,8 @@ function calcDate() {
     else if (daysUntilSeminar >= 14) {
 
         message +=
-            "<div style='background:#e8f4ff;" +
-            "border-left:8px solid #0066cc;" +
-            "padding:15px;" +
-            "font-size:20px;" +
-            "font-weight:bold;" +
-            "color:#0066cc;'>" +
-            "● 現在申込可能です。<br>" +
+            "<div class='status-blue'>" +
+            "✅ 現在申込可能です。<br>" +
             "開催まであと " +
             daysUntilSeminar +
             " 日です。" +
@@ -124,12 +110,7 @@ function calcDate() {
     else {
 
         message +=
-            "<div style='background:#ffeaea;" +
-            "border-left:8px solid #d50000;" +
-            "padding:15px;" +
-            "font-size:24px;" +
-            "font-weight:bold;" +
-            "color:#d50000;'>" +
+            "<div class='status-red'>" +
             "⚠ 大至急申込を行ってください！！<br>" +
             "開催まであと " +
             daysUntilSeminar +
@@ -148,77 +129,206 @@ function calcDate() {
 <style>
 
 body {
+
     font-family: sans-serif;
-    background-color: #f5f7fa;
+    background: #f5f7fa;
     margin: 0;
-    padding: 20px;
+    padding: 15px;
+    line-height: 1.7;
+
 }
 
 .container {
-    max-width: 700px;
-    margin: 50px auto;
+
+    max-width: 900px;
+    margin: 20px auto;
     background: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+
 }
 
 h1 {
+
+    text-align: center;
     color: #003366;
+    margin-top: 0;
+
 }
 
 h2 {
+
     color: #003366;
+
+}
+
+.card {
+
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+
+}
+
+.notice {
+
+    background: #fff8d6;
+    border-left: 6px solid #ffcc00;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+
+}
+
+.menu-card {
+
+    background: #f8fbff;
+    border: 1px solid #d9e8ff;
+
+}
+
+.menu-card ul {
+
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+
+}
+
+.menu-card li {
+
+    margin-bottom: 10px;
+
+}
+
+.menu-card a {
+
+    display: block;
+    background: white;
+    padding: 12px;
+    border-radius: 10px;
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: bold;
+
+}
+
+.menu-card a:hover {
+
+    background: #eef6ff;
+
 }
 
 input[type="password"],
 input[type="date"] {
 
     width: 100%;
-    padding: 12px;
+    padding: 14px;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
     box-sizing: border-box;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 12px 0;
     font-size: 16px;
 
 }
 
 button {
 
-    background-color: #0066cc;
+    width: 100%;
+    background: #0066cc;
     color: white;
-    padding: 12px 25px;
     border: none;
-    border-radius: 8px;
-    font-size: 16px;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: bold;
     cursor: pointer;
 
 }
 
 button:hover {
-    background-color: #0050a0;
+
+    background: #0050a0;
+
 }
 
 #content {
-    display: none;
-}
 
-.notice {
-    background-color: #fff8d6;
-    border-left: 5px solid #ffcc00;
-    padding: 15px;
-    margin-bottom: 20px;
+    display: none;
+
 }
 
 #result {
-    margin-top: 15px;
-    padding: 15px;
-    background-color: #eef6ff;
-    border-radius: 8px;
+
+    margin-top: 20px;
+
 }
 
-ul {
-    line-height: 2;
+.status-gray {
+
+    background: #eeeeee;
+    border-left: 8px solid #666666;
+    padding: 15px;
+    border-radius: 10px;
+    color: #666666;
+    font-size: 18px;
+    font-weight: bold;
+
+}
+
+.status-blue {
+
+    background: #e8f4ff;
+    border-left: 8px solid #0066cc;
+    padding: 15px;
+    border-radius: 10px;
+    color: #0066cc;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+.status-red {
+
+    background: #ffeaea;
+    border-left: 8px solid #d50000;
+    padding: 15px;
+    border-radius: 10px;
+    color: #d50000;
+    font-size: 22px;
+    font-weight: bold;
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .container {
+
+        padding: 15px;
+
+    }
+
+    h1 {
+
+        font-size: 24px;
+
+    }
+
+    h2 {
+
+        font-size: 20px;
+
+    }
+
+    button {
+
+        font-size: 18px;
+
+    }
+
 }
 
 </style>
@@ -254,49 +364,77 @@ ul {
 
     </div>
 
-    <h2>目次</h2>
+    <div class="card menu-card">
 
-    <ul>
-        <li><a href="#datecheck">申込開始日の確認</a></li>
-        <li><a href="#moshikomi">セミナー・研修への申込</a></li>
-        <li><a href="#cancel">セミナー・研修の申込キャンセル</a></li>
-    </ul>
+        <h2>目次</h2>
 
-    <hr>
+        <ul>
 
-    <h2 id="datecheck">申込開始日の確認</h2>
+            <li>
+                <a href="#datecheck">
+                    📅 申込開始日の確認
+                </a>
+            </li>
 
-    <p>
-        開催日を入力すると申込状況を確認できます。
-    </p>
+            <li>
+                <a href="#moshikomi">
+                    📝 セミナー・研修への申込
+                </a>
+            </li>
 
-    <input type="date" id="seminarDate">
+            <li>
+                <a href="#cancel">
+                    ❌ セミナー・研修の申込キャンセル
+                </a>
+            </li>
 
-    <button onclick="calcDate()">
-        確認する
-    </button>
+        </ul>
 
-    <div id="result"></div>
+    </div>
 
-    <hr>
+    <div class="card">
 
-    <h2 id="moshikomi">
-        セミナー・研修への申込
-    </h2>
+        <h2 id="datecheck">
+            📅 申込開始日の確認
+        </h2>
 
-    <p>
-        ここにセミナー・研修への申込に関する説明を記載します。
-    </p>
+        <p>
+            開催日を入力すると申込状況を確認できます。
+        </p>
 
-    <hr>
+        <input type="date" id="seminarDate">
 
-    <h2 id="cancel">
-        セミナー・研修の申込キャンセル
-    </h2>
+        <button onclick="calcDate()">
+            判定する
+        </button>
 
-    <p>
-        ここにセミナー・研修の申込キャンセルに関する説明を記載します。
-    </p>
+        <div id="result"></div>
+
+    </div>
+
+    <div class="card">
+
+        <h2 id="moshikomi">
+            📝 セミナー・研修への申込
+        </h2>
+
+        <p>
+            ここにセミナー・研修への申込方法を記載します。
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h2 id="cancel">
+            ❌ セミナー・研修の申込キャンセル
+        </h2>
+
+        <p>
+            ここにキャンセル方法を記載します。
+        </p>
+
+    </div>
 
 </div>
 
