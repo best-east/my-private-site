@@ -12,7 +12,7 @@
     <title>各種手続き</title>
 
     <script>
-        // パスワード確認
+        // パスワードを確認する
         function checkPassword() {
             const passwordInput =
                 document.getElementById("password");
@@ -29,7 +29,7 @@
             }
         }
 
-        // 開催日から1か月前の日付を計算
+        // 開催日の1か月前を計算する
         function getOneMonthBefore(date) {
             const originalDay = date.getDate();
 
@@ -52,7 +52,7 @@
             return result;
         }
 
-        // 日付を「○年○月○日」に整形
+        // 日付を「○年○月○日」に整形する
         function formatJapaneseDate(date) {
             return (
                 date.getFullYear() + "年" +
@@ -61,7 +61,7 @@
             );
         }
 
-        // 申込状況の判定
+        // 開催日と申込状況を判定する
         function calcDate() {
             const dateValue =
                 document.getElementById("seminarDate").value;
@@ -84,7 +84,8 @@
                 Number(dateParts[2])
             );
 
-            const startDate = getOneMonthBefore(seminarDate);
+            const startDate =
+                getOneMonthBefore(seminarDate);
 
             const today = new Date();
 
@@ -95,110 +96,117 @@
             const millisecondsPerDay =
                 1000 * 60 * 60 * 24;
 
-            const daysUntilApplicationStart = Math.round(
-                (startDate - today) / millisecondsPerDay
-            );
+            const daysUntilApplicationStart =
+                Math.round(
+                    (startDate - today) /
+                    millisecondsPerDay
+                );
 
-            const daysUntilSeminar = Math.round(
-                (seminarDate - today) / millisecondsPerDay
-            );
+            const daysUntilSeminar =
+                Math.round(
+                    (seminarDate - today) /
+                    millisecondsPerDay
+                );
 
             let message = "";
 
             message +=
                 "<div class='date-information'>" +
-                "開催日は <strong>" +
-                formatJapaneseDate(seminarDate) +
-                "</strong> です。<br>" +
-                "申込開始日は <strong>" +
-                formatJapaneseDate(startDate) +
-                "</strong> です。" +
+                    "開催日は <strong>" +
+                    formatJapaneseDate(seminarDate) +
+                    "</strong> です。<br>" +
+                    "申込開始日は <strong>" +
+                    formatJapaneseDate(startDate) +
+                    "</strong> です。" +
                 "</div>";
 
-            // 開催終了後
+            // 開催日を過ぎている場合
             if (daysUntilSeminar < 0) {
                 message +=
                     "<div class='status-card status-gray'>" +
-                    "<div class='status-title'>" +
-                    "このセミナーは既に終了しています。" +
-                    "</div>" +
+                        "<div class='status-title'>" +
+                            "このセミナーは既に終了しています。" +
+                        "</div>" +
                     "</div>";
             }
 
-            // 申込期間前
+            // 申込開始日前の場合
             else if (daysUntilApplicationStart > 0) {
                 message +=
                     "<div class='status-card status-gray'>" +
-                    "<div class='status-title'>" +
-                    "このセミナーの申込期間前です。" +
-                    "</div>" +
-                    "<div class='status-detail'>" +
-                    "申込開始まであと <strong>" +
-                    daysUntilApplicationStart +
-                    "日</strong> です。" +
-                    "</div>" +
+                        "<div class='status-title'>" +
+                            "このセミナーの申込期間前です。" +
+                        "</div>" +
+                        "<div class='status-detail'>" +
+                            "申込開始まであと <strong>" +
+                            daysUntilApplicationStart +
+                            "日</strong> です。" +
+                        "</div>" +
                     "</div>";
             }
 
-            // 申込可能かつ開催14日以上前
+            // 申込可能で、開催まで14日以上ある場合
             else if (daysUntilSeminar >= 14) {
                 message +=
                     "<div class='status-card status-blue'>" +
-                    "<div class='status-title'>" +
-                    "✅ 現在申込可能です。" +
-                    "</div>" +
-                    "<div class='status-detail'>" +
-                    "開催まであと <strong>" +
-                    daysUntilSeminar +
-                    "日</strong> です。" +
-                    "</div>" +
+                        "<div class='status-title'>" +
+                            "✅ 現在申込可能です。" +
+                        "</div>" +
+                        "<div class='status-detail'>" +
+                            "開催まであと <strong>" +
+                            daysUntilSeminar +
+                            "日</strong> です。" +
+                        "</div>" +
                     "</div>";
             }
 
-            // 開催13日前から当日
+            // 開催13日前から開催当日まで
             else {
                 message +=
                     "<div class='status-card status-red'>" +
-                    "<div class='status-title'>" +
-                    "⚠ 大至急申込を行ってください！！" +
-                    "</div>" +
-                    "<div class='status-detail'>" +
-                    "開催まであと <strong>" +
-                    daysUntilSeminar +
-                    "日</strong> です。" +
-                    "</div>" +
+                        "<div class='status-title'>" +
+                            "⚠ 大至急申込を行ってください！！" +
+                        "</div>" +
+                        "<div class='status-detail'>" +
+                            "開催まであと <strong>" +
+                            daysUntilSeminar +
+                            "日</strong> です。" +
+                        "</div>" +
                     "</div>";
             }
 
             resultArea.innerHTML = message;
         }
 
-        // Enterキーへの対応
-        document.addEventListener("DOMContentLoaded", function () {
-            const passwordInput =
-                document.getElementById("password");
+        // Enterキーでも操作できるようにする
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+                const passwordInput =
+                    document.getElementById("password");
 
-            const seminarDateInput =
-                document.getElementById("seminarDate");
+                const seminarDateInput =
+                    document.getElementById("seminarDate");
 
-            passwordInput.addEventListener(
-                "keydown",
-                function (event) {
-                    if (event.key === "Enter") {
-                        checkPassword();
+                passwordInput.addEventListener(
+                    "keydown",
+                    function (event) {
+                        if (event.key === "Enter") {
+                            checkPassword();
+                        }
                     }
-                }
-            );
+                );
 
-            seminarDateInput.addEventListener(
-                "keydown",
-                function (event) {
-                    if (event.key === "Enter") {
-                        calcDate();
+                seminarDateInput.addEventListener(
+                    "keydown",
+                    function (event) {
+                        if (event.key === "Enter") {
+                            calcDate();
+                        }
                     }
-                }
-            );
-        });
+                );
+            }
+        );
     </script>
 
     <style>
@@ -246,7 +254,8 @@
             padding: 25px 20px;
             border-radius: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 18px rgba(0, 51, 102, 0.2);
+            box-shadow:
+                0 4px 18px rgba(0, 51, 102, 0.2);
         }
 
         .page-header h1 {
@@ -264,7 +273,8 @@
             border-radius: 18px;
             padding: 22px;
             margin-bottom: 20px;
-            box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
+            box-shadow:
+                0 3px 14px rgba(0, 0, 0, 0.08);
         }
 
         .card h2 {
@@ -330,8 +340,13 @@
                 transform 0.2s;
         }
 
+        .menu-link:visited {
+            color: #0066cc;
+        }
+
         .menu-link:hover {
             background-color: #eef6ff;
+            color: #0050a0;
             transform: translateY(-1px);
         }
 
@@ -356,7 +371,9 @@
 
         input[type="password"]:focus,
         input[type="date"]:focus {
-            outline: 3px solid rgba(0, 102, 204, 0.18);
+            outline:
+                3px solid rgba(0, 102, 204, 0.18);
+
             border-color: #0066cc;
         }
 
@@ -366,14 +383,14 @@
             width: 100%;
             min-height: 52px;
             background-color: #0066cc;
-            color: #ffffff;
+            color: #ffffff !important;
             border: none;
             border-radius: 12px;
             padding: 14px 18px;
             font-size: 18px;
             font-weight: bold;
             text-align: center;
-            text-decoration: none;
+            text-decoration: none !important;
             cursor: pointer;
             transition:
                 background-color 0.2s,
@@ -383,15 +400,41 @@
         button:hover,
         .button:hover {
             background-color: #0050a0;
+            color: #ffffff !important;
+            text-decoration: none !important;
             transform: translateY(-1px);
         }
 
-        .button-secondary {
-            background-color: #008651;
+        .button:visited,
+        .button:active,
+        .button:focus {
+            color: #ffffff !important;
+            text-decoration: none !important;
         }
 
-        .button-secondary:hover {
-            background-color: #006f43;
+        /*
+         * 申込手順ボタン
+         * 文字色を必ず白にする
+         */
+        .button-secondary,
+        a.button-secondary,
+        a.button-secondary:link,
+        a.button-secondary:visited,
+        a.button-secondary:hover,
+        a.button-secondary:active,
+        a.button-secondary:focus {
+            color: #ffffff !important;
+            text-decoration: none !important;
+        }
+
+        .button-secondary,
+        a.button-secondary {
+            background-color: #008651 !important;
+        }
+
+        .button-secondary:hover,
+        a.button-secondary:hover {
+            background-color: #006f43 !important;
         }
 
         #content {
@@ -514,7 +557,9 @@
 
         <div class="card login-card">
 
-            <div class="login-icon">🔐</div>
+            <div class="login-icon">
+                🔐
+            </div>
 
             <h1>各種手続き</h1>
 
@@ -571,7 +616,10 @@
         </section>
 
         <!-- 目次 -->
-        <nav class="card menu-card" aria-label="ページ内メニュー">
+        <nav
+            class="card menu-card"
+            aria-label="ページメニュー"
+        >
 
             <h2>目次</h2>
 
@@ -584,7 +632,7 @@
                 </li>
 
                 <li>
-                    moshikomi.html
+                    #moshikomi
                         📝 セミナー・研修への申込
                     </a>
                 </li>
@@ -600,7 +648,10 @@
         </nav>
 
         <!-- 申込開始日の確認 -->
-        <section class="card" id="datecheck">
+        <section
+            class="card"
+            id="datecheck"
+        >
 
             <h2>
                 📅 申込開始日の確認
@@ -635,7 +686,10 @@
         </section>
 
         <!-- セミナー・研修への申込 -->
-        <section class="card" id="moshikomi">
+        <section
+            class="card"
+            id="moshikomi"
+        >
 
             <h2>
                 📝 セミナー・研修への申込
@@ -643,28 +697,34 @@
 
             <p>
                 セミナー・研修への申込手順を、
-                スマートフォンでも確認しやすい形式でご案内しています。
+                スマートフォンでも確認しやすい形式で
+                ご案内しています。
             </p>
 
             moshikomi.html
-                📄 申込手順を見る
+                📝 セミナー・研修への申込手順
             </a>
 
             <p class="small-note">
-                ボタンを押すと、申込手順のページへ移動します。
+                ボタンを押すと、
+                申込手順のページへ移動します。
             </p>
 
         </section>
 
         <!-- キャンセル -->
-        <section class="card" id="cancel">
+        <section
+            class="card"
+            id="cancel"
+        >
 
             <h2>
                 ❌ セミナー・研修の申込キャンセル
             </h2>
 
             <p>
-                ここにセミナー・研修の申込キャンセル方法を記載します。
+                ここにセミナー・研修の
+                申込キャンセル方法を記載します。
             </p>
 
         </section>
