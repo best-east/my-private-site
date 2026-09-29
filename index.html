@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
@@ -12,14 +11,11 @@
     <title>各種手続き</title>
 
     <script>
-        // パスワード認証
         function checkPassword() {
             const passwordInput =
                 document.getElementById("password");
 
-            const password = passwordInput.value;
-
-            if (password === "hokuriku") {
+            if (passwordInput.value === "hokuriku") {
                 document.getElementById("login").style.display = "none";
                 document.getElementById("content").style.display = "block";
             } else {
@@ -29,7 +25,6 @@
             }
         }
 
-        // 開催日の1か月前を計算
         function getOneMonthBefore(date) {
             const originalDay = date.getDate();
 
@@ -52,7 +47,6 @@
             return result;
         }
 
-        // 日付を「○年○月○日」で表示
         function formatJapaneseDate(date) {
             return (
                 date.getFullYear() + "年" +
@@ -61,7 +55,6 @@
             );
         }
 
-        // 申込期間を判定
         function calcDate() {
             const dateValue =
                 document.getElementById("seminarDate").value;
@@ -75,7 +68,6 @@
                 return;
             }
 
-            // YYYY-MM-DDをローカル日付として読み込む
             const dateParts = dateValue.split("-");
 
             const seminarDate = new Date(
@@ -108,9 +100,7 @@
                     millisecondsPerDay
                 );
 
-            let message = "";
-
-            message +=
+            let message =
                 "<div class='date-information'>" +
                     "開催日は <strong>" +
                     formatJapaneseDate(seminarDate) +
@@ -120,7 +110,6 @@
                     "</strong> です。" +
                 "</div>";
 
-            // 開催終了後
             if (daysUntilSeminar < 0) {
                 message +=
                     "<div class='status-card status-gray'>" +
@@ -128,10 +117,7 @@
                             "このセミナーは既に終了しています。" +
                         "</div>" +
                     "</div>";
-            }
-
-            // 申込期間前
-            else if (daysUntilApplicationStart > 0) {
+            } else if (daysUntilApplicationStart > 0) {
                 message +=
                     "<div class='status-card status-gray'>" +
                         "<div class='status-title'>" +
@@ -143,10 +129,7 @@
                             "日</strong> です。" +
                         "</div>" +
                     "</div>";
-            }
-
-            // 開催14日以上前
-            else if (daysUntilSeminar >= 14) {
+            } else if (daysUntilSeminar >= 14) {
                 message +=
                     "<div class='status-card status-blue'>" +
                         "<div class='status-title'>" +
@@ -158,10 +141,7 @@
                             "日</strong> です。" +
                         "</div>" +
                     "</div>";
-            }
-
-            // 開催13日前から当日
-            else {
+            } else {
                 message +=
                     "<div class='status-card status-red'>" +
                         "<div class='status-title'>" +
@@ -178,7 +158,6 @@
             resultArea.innerHTML = message;
         }
 
-        // Enterキーで操作
         document.addEventListener(
             "DOMContentLoaded",
             function () {
@@ -243,11 +222,8 @@
         }
 
         .page-header {
-            background: linear-gradient(
-                135deg,
-                #003366,
-                #0066cc
-            );
+            background:
+                linear-gradient(135deg, #003366, #0066cc);
 
             color: #ffffff;
             text-align: center;
@@ -306,8 +282,6 @@
             font-size: 19px;
             margin-bottom: 5px;
         }
-
-        /* 目次 */
 
         .menu-card {
             background-color: #f8fbff;
@@ -383,29 +357,22 @@
             border-color: #0066cc;
         }
 
-        /* 通常ボタン */
-
-        button,
-        .button {
+        button {
             display: block;
             width: 100%;
             min-height: 52px;
+            background-color: #0066cc;
+            color: #ffffff;
             border: none;
             border-radius: 12px;
             padding: 14px 18px;
             font-size: 18px;
             font-weight: bold;
             text-align: center;
-            text-decoration: none;
             cursor: pointer;
             transition:
                 background-color 0.2s,
                 transform 0.2s;
-        }
-
-        button {
-            background-color: #0066cc;
-            color: #ffffff;
         }
 
         button:hover,
@@ -415,33 +382,38 @@
         }
 
         /*
-         * 申込手順ボタン
-         * 通常、訪問済み、マウス操作時も白文字
+         * 申込手順の緑色ボタン
+         * すべての状態で白文字に固定
          */
-
-        a.application-button,
-        a.application-button:link,
-        a.application-button:visited,
-        a.application-button:hover,
-        a.application-button:focus,
-        a.application-button:active {
+        .application-button {
             display: block;
             width: 100%;
             min-height: 52px;
             background-color: #008651;
-            color: #ffffff;
-            text-decoration: none;
+            color: #ffffff !important;
+            text-decoration: none !important;
             text-align: center;
             padding: 14px 18px;
             border-radius: 12px;
             font-size: 18px;
             font-weight: bold;
+            transition:
+                background-color 0.2s,
+                transform 0.2s;
         }
 
-        a.application-button:hover,
-        a.application-button:focus {
+        .application-button:link,
+        .application-button:visited,
+        .application-button:active {
+            color: #ffffff !important;
+            text-decoration: none !important;
+        }
+
+        .application-button:hover,
+        .application-button:focus {
             background-color: #006f43;
-            color: #ffffff;
+            color: #ffffff !important;
+            text-decoration: none !important;
             transform: translateY(-1px);
         }
 
@@ -544,8 +516,7 @@
             }
 
             button,
-            .button,
-            a.application-button {
+            .application-button {
                 font-size: 17px;
             }
 
@@ -711,7 +682,7 @@
                 ご案内しています。
             </p>
 
-            moshikomi.html
+            ./moshikomi.html
                 📝 セミナー・研修への申込手順
             </a>
 
