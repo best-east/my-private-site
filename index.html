@@ -1,20 +1,92 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>各種手続き</title>
+
 <script>
+
 function checkPassword() {
-    const password = document.getElementById("password").value;
+
+    const password =
+        document.getElementById("password").value;
 
     if (password === "hokuriku") {
+
         document.getElementById("login").style.display = "none";
         document.getElementById("content").style.display = "block";
+
     } else {
+
         alert("パスワードが違います");
+
     }
+
 }
+
+function calcDate() {
+
+    const dateValue =
+        document.getElementById("seminarDate").value;
+
+    if (!dateValue) {
+
+        alert("開催日を入力してください");
+        return;
+
+    }
+
+    const seminarDate = new Date(dateValue);
+
+    const startDate = new Date(seminarDate);
+
+    startDate.setMonth(
+        startDate.getMonth() - 1
+    );
+
+    const today = new Date();
+
+    today.setHours(0, 0, 0, 0);
+    startDate.setHours(0, 0, 0, 0);
+
+    const diffDays =
+        Math.ceil(
+            (startDate - today) /
+            (1000 * 60 * 60 * 24)
+        );
+
+    let message = "";
+
+    if (diffDays > 0) {
+
+        message =
+            "申込開始日は <strong>" +
+            startDate.getFullYear() + "年" +
+            (startDate.getMonth() + 1) + "月" +
+            startDate.getDate() + "日</strong> です。<br><br>" +
+            "受付開始まであと <strong>" +
+            diffDays +
+            "</strong> 日です。";
+
+    } else {
+
+        message =
+            "申込開始日は <strong>" +
+            startDate.getFullYear() + "年" +
+            (startDate.getMonth() + 1) + "月" +
+            startDate.getDate() + "日</strong> です。<br><br>" +
+            "<span style='color:green;font-weight:bold;'>現在申込可能です。</span>";
+
+    }
+
+    document.getElementById("result").innerHTML =
+        message;
+
+}
+
 </script>
 
 <style>
@@ -27,29 +99,38 @@ body {
 }
 
 .container {
-    max-width: 600px;
+
+    max-width: 700px;
     margin: 50px auto;
     background: white;
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 3px 15px rgba(0,0,0,0.1);
-    text-align: center;
+
 }
 
 h1 {
     color: #003366;
 }
 
-input[type="password"] {
+h2 {
+    color: #003366;
+}
+
+input[type="password"],
+input[type="date"] {
+
     width: 100%;
     padding: 12px;
     box-sizing: border-box;
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: 16px;
+
 }
 
 button {
+
     background-color: #0066cc;
     color: white;
     padding: 12px 25px;
@@ -57,22 +138,47 @@ button {
     border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
+
 }
 
 button:hover {
+
     background-color: #0050a0;
+
 }
 
 #content {
+
     display: none;
+
+}
+
+.notice {
+
+    background-color: #fff8d6;
+    border-left: 5px solid #ffcc00;
+    padding: 15px;
+    margin-bottom: 20px;
+
+}
+
+#result {
+
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #eef6ff;
+    border-radius: 8px;
+
 }
 
 </style>
 
 </head>
+
 <body>
 
 <div id="login" class="container">
+
     <h1>各種手続き</h1>
 
     <p>
@@ -84,39 +190,61 @@ button:hover {
     <button onclick="checkPassword()">
         ログイン
     </button>
+
 </div>
 
 <div id="content" class="container">
 
-<h1>各種手続き</h1>
+    <h1>各種手続き</h1>
 
-<h2>目次</h2>
+    <div class="notice">
+        <strong>お知らせ</strong><br>
+        セミナー・研修の申込は開催日の1か月前から可能です。
+    </div>
 
-<ul style="text-align:left;">
+    <h2>目次</h2>
 
-<li><a href="#moshikomi">セミナー・研修への申込</a></li>
+    <ul>
+        <li><a href="#datecheck">申込開始日の確認</a></li>
+        <li><a href="#moshikomi">セミナー・研修への申込</a></li>
+        <li><a href="#cancel">セミナー・研修の申込キャンセル</a></li>
+    </ul>
 
-<li><a href="#cancel">セミナー・研修の申込キャンセル</a></li>
+    <hr>
 
-</ul>
+    <h2 id="datecheck">申込開始日の確認</h2>
 
-<hr>
+    <p>
+        開催日を入力すると申込開始日を確認できます。
+    </p>
 
-<h2 id="moshikomi">セミナー・研修への申込</h2>
+    <input type="date" id="seminarDate">
 
-<p>
-ここにセミナー・研修への申込に関する説明を記載します。
-</p>
+    <button onclick="calcDate()">
+        申込開始日を確認
+    </button>
 
-<hr>
+    <p id="result"></p>
 
-<h2 id="cancel">セミナー・研修の申込キャンセル</h2>
+    <hr>
 
-<p>
-ここにセミナー・研修の申込キャンセルに関する説明を記載します。
-</p>
+    <h2 id="moshikomi">
+        セミナー・研修への申込
+    </h2>
 
-<hr>
+    <p>
+        ここにセミナー・研修への申込に関する説明を記載します。
+    </p>
+
+    <hr>
+
+    <h2 id="cancel">
+        セミナー・研修の申込キャンセル
+    </h2>
+
+    <p>
+        ここにセミナー・研修の申込キャンセルに関する説明を記載します。
+    </p>
 
 </div>
 
