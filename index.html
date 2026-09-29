@@ -24,7 +24,6 @@ function checkPassword() {
         alert("パスワードが違います");
 
     }
-
 }
 
 function calcDate() {
@@ -74,21 +73,38 @@ function calcDate() {
         startDate.getDate() +
         "日</strong>です。<br><br>";
 
-    if (daysUntilApplicationStart > 0) {
+    if (daysUntilSeminar < 0) {
 
         message +=
-            "受付開始まであと <strong>" +
-            daysUntilApplicationStart +
-            "</strong> 日です。<br><br>";
-
-    } else {
-
-        message +=
-            "<strong style='color:green;'>現在申込可能です。</strong><br><br>";
+            "<div style='background:#eeeeee;" +
+            "border-left:8px solid #666666;" +
+            "padding:15px;" +
+            "font-size:20px;" +
+            "font-weight:bold;" +
+            "color:#666666;'>" +
+            "このセミナーは既に終了しています。" +
+            "</div>";
 
     }
 
-    if (daysUntilSeminar >= 30) {
+    else if (daysUntilApplicationStart > 0) {
+
+        message +=
+            "<div style='background:#eeeeee;" +
+            "border-left:8px solid #666666;" +
+            "padding:15px;" +
+            "font-size:20px;" +
+            "font-weight:bold;" +
+            "color:#666666;'>" +
+            "このセミナーの申込期間前です。<br>" +
+            "申込開始まであと " +
+            daysUntilApplicationStart +
+            " 日です。" +
+            "</div>";
+
+    }
+
+    else if (daysUntilSeminar >= 14) {
 
         message +=
             "<div style='background:#e8f4ff;" +
@@ -97,30 +113,15 @@ function calcDate() {
             "font-size:20px;" +
             "font-weight:bold;" +
             "color:#0066cc;'>" +
-            "● 開催まであと " +
+            "● 現在申込可能です。<br>" +
+            "開催まであと " +
             daysUntilSeminar +
-            " 日です。余裕があります。" +
+            " 日です。" +
             "</div>";
 
     }
 
-    else if (daysUntilSeminar >= 14) {
-
-        message +=
-            "<div style='background:#fff3e0;" +
-            "border-left:8px solid #ff9800;" +
-            "padding:15px;" +
-            "font-size:20px;" +
-            "font-weight:bold;" +
-            "color:#ff9800;'>" +
-            "▲ 開催まであと " +
-            daysUntilSeminar +
-            " 日です。早めの申込をおすすめします。" +
-            "</div>";
-
-    }
-
-    else if (daysUntilSeminar >= 0) {
+    else {
 
         message +=
             "<div style='background:#ffeaea;" +
@@ -133,20 +134,6 @@ function calcDate() {
             "開催まであと " +
             daysUntilSeminar +
             " 日です。" +
-            "</div>";
-
-    }
-
-    else {
-
-        message +=
-            "<div style='background:#eeeeee;" +
-            "border-left:8px solid #666666;" +
-            "padding:15px;" +
-            "font-size:20px;" +
-            "font-weight:bold;" +
-            "color:#666666;'>" +
-            "このセミナーは既に終了しています。" +
             "</div>";
 
     }
@@ -168,14 +155,12 @@ body {
 }
 
 .container {
-
     max-width: 700px;
     margin: 50px auto;
     background: white;
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 3px 15px rgba(0,0,0,0.1);
-
 }
 
 h1 {
@@ -211,33 +196,29 @@ button {
 }
 
 button:hover {
-
     background-color: #0050a0;
-
 }
 
 #content {
-
     display: none;
-
 }
 
 .notice {
-
     background-color: #fff8d6;
     border-left: 5px solid #ffcc00;
     padding: 15px;
     margin-bottom: 20px;
-
 }
 
 #result {
-
     margin-top: 15px;
     padding: 15px;
     background-color: #eef6ff;
     border-radius: 8px;
+}
 
+ul {
+    line-height: 2;
 }
 
 </style>
@@ -276,63 +257,45 @@ button:hover {
     <h2>目次</h2>
 
     <ul>
-
         <li><a href="#datecheck">申込開始日の確認</a></li>
         <li><a href="#moshikomi">セミナー・研修への申込</a></li>
         <li><a href="#cancel">セミナー・研修の申込キャンセル</a></li>
-
     </ul>
 
     <hr>
 
-    <h2 id="datecheck">
-
-        申込開始日の確認
-
-    </h2>
+    <h2 id="datecheck">申込開始日の確認</h2>
 
     <p>
-
-        開催日を入力すると申込開始日を確認できます。
-
+        開催日を入力すると申込状況を確認できます。
     </p>
 
     <input type="date" id="seminarDate">
 
     <button onclick="calcDate()">
-
-        申込開始日を確認
-
+        確認する
     </button>
 
-    <p id="result"></p>
+    <div id="result"></div>
 
     <hr>
 
     <h2 id="moshikomi">
-
         セミナー・研修への申込
-
     </h2>
 
     <p>
-
         ここにセミナー・研修への申込に関する説明を記載します。
-
     </p>
 
     <hr>
 
     <h2 id="cancel">
-
         セミナー・研修の申込キャンセル
-
     </h2>
 
     <p>
-
         ここにセミナー・研修の申込キャンセルに関する説明を記載します。
-
     </p>
 
 </div>
