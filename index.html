@@ -51,6 +51,7 @@ function calcDate() {
 
     today.setHours(0, 0, 0, 0);
     startDate.setHours(0, 0, 0, 0);
+    seminarDate.setHours(0, 0, 0, 0);
 
     const daysUntilApplicationStart =
         Math.ceil(
@@ -78,14 +79,79 @@ function calcDate() {
         message +=
             "受付開始まであと <strong>" +
             daysUntilApplicationStart +
-            "</strong> 日です。";
+            "</strong> 日です。<br><br>";
 
     } else {
 
         message +=
-            "<span style='color:green;font-weight:bold;'>現在申込可能です。</span>";
+            "<strong style='color:green;'>現在申込可能です。</strong><br><br>";
 
     }
+
+    if (daysUntilSeminar >= 30) {
+
+        message +=
+            "<div style='background:#e8f4ff;" +
+            "border-left:8px solid #0066cc;" +
+            "padding:15px;" +
+            "font-size:20px;" +
+            "font-weight:bold;" +
+            "color:#0066cc;'>" +
+            "● 開催まであと " +
+            daysUntilSeminar +
+            " 日です。余裕があります。" +
+            "</div>";
+
+    }
+    else if (daysUntilSeminar >= 14) {
+
+        message +=
+            "<div style='background:#fff3e0;" +
+            "border-left:8px solid #ff9800;" +
+            "padding:15px;" +
+            "font-size:20px;" +
+            "font-weight:bold;" +
+            "color:#ff9800;'>" +
+            "▲ 開催まであと " +
+            daysUntilSeminar +
+            " 日です。早めの申込をおすすめします。" +
+            "</div>";
+
+    }
+    else if (daysUntilSeminar >= 0) {
+
+        message +=
+            "<div style='background:#ffeaea;" +
+            "border-left:8px solid #d50000;" +
+            "padding:15px;" +
+            "font-size:24px;" +
+            "font-weight:bold;" +
+            "color:#d50000;'>" +
+            "⚠ 大至急申込を行ってください！！<br>" +
+            "開催まであと " +
+            daysUntilSeminar +
+            " 日です。" +
+            "</div>";
+
+    }
+    else {
+
+        message +=
+            "<div style='background:#eeeeee;" +
+            "border-left:8px solid #666666;" +
+            "padding:15px;" +
+            "font-size:20px;" +
+            "font-weight:bold;" +
+            "color:#666666;'>" +
+            "このセミナーは既に終了しています。" +
+            "</div>";
+
+    }
+
+    document.getElementById("result").innerHTML =
+        message;
+
+}
 
     if (daysUntilSeminar <= 14 && daysUntilSeminar >= 0) {
 
