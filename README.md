@@ -1,1 +1,1 @@
-# my-private-site
+# best-hokuriku
