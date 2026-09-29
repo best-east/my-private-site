@@ -52,33 +52,48 @@ function calcDate() {
     today.setHours(0, 0, 0, 0);
     startDate.setHours(0, 0, 0, 0);
 
-    const diffDays =
+    const daysUntilApplicationStart =
         Math.ceil(
             (startDate - today) /
             (1000 * 60 * 60 * 24)
         );
 
+    const daysUntilSeminar =
+        Math.ceil(
+            (seminarDate - today) /
+            (1000 * 60 * 60 * 24)
+        );
+
     let message = "";
 
-    if (diffDays > 0) {
+    message +=
+        "申込開始日は <strong>" +
+        startDate.getFullYear() + "年" +
+        (startDate.getMonth() + 1) + "月" +
+        startDate.getDate() + "日" +
+        "</strong> です。<br><br>";
 
-        message =
-            "申込開始日は <strong>" +
-            startDate.getFullYear() + "年" +
-            (startDate.getMonth() + 1) + "月" +
-            startDate.getDate() + "日</strong> です。<br><br>" +
+    if (daysUntilApplicationStart > 0) {
+
+        message +=
             "受付開始まであと <strong>" +
-            diffDays +
+            daysUntilApplicationStart +
             "</strong> 日です。";
 
     } else {
 
-        message =
-            "申込開始日は <strong>" +
-            startDate.getFullYear() + "年" +
-            (startDate.getMonth() + 1) + "月" +
-            startDate.getDate() + "日</strong> です。<br><br>" +
+        message +=
             "<span style='color:green;font-weight:bold;'>現在申込可能です。</span>";
+
+    }
+
+    if (daysUntilSeminar <= 14 && daysUntilSeminar >= 0) {
+
+        message +=
+            "<br><br>" +
+            "<span style='color:red;font-size:22px;font-weight:bold;'>" +
+            "⚠ 大至急申込を行ってください！！" +
+            "</span>";
 
     }
 
