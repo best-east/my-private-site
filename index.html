@@ -12,7 +12,7 @@
     <title>各種手続き</title>
 
     <script>
-        // パスワードを確認する
+        // パスワード認証
         function checkPassword() {
             const passwordInput =
                 document.getElementById("password");
@@ -29,7 +29,7 @@
             }
         }
 
-        // 開催日の1か月前を計算する
+        // 開催日の1か月前を計算
         function getOneMonthBefore(date) {
             const originalDay = date.getDate();
 
@@ -52,7 +52,7 @@
             return result;
         }
 
-        // 日付を「○年○月○日」に整形する
+        // 日付を「○年○月○日」で表示
         function formatJapaneseDate(date) {
             return (
                 date.getFullYear() + "年" +
@@ -61,7 +61,7 @@
             );
         }
 
-        // 開催日と申込状況を判定する
+        // 申込期間を判定
         function calcDate() {
             const dateValue =
                 document.getElementById("seminarDate").value;
@@ -120,7 +120,7 @@
                     "</strong> です。" +
                 "</div>";
 
-            // 開催日を過ぎている場合
+            // 開催終了後
             if (daysUntilSeminar < 0) {
                 message +=
                     "<div class='status-card status-gray'>" +
@@ -130,7 +130,7 @@
                     "</div>";
             }
 
-            // 申込開始日前の場合
+            // 申込期間前
             else if (daysUntilApplicationStart > 0) {
                 message +=
                     "<div class='status-card status-gray'>" +
@@ -145,7 +145,7 @@
                     "</div>";
             }
 
-            // 申込可能で、開催まで14日以上ある場合
+            // 開催14日以上前
             else if (daysUntilSeminar >= 14) {
                 message +=
                     "<div class='status-card status-blue'>" +
@@ -160,7 +160,7 @@
                     "</div>";
             }
 
-            // 開催13日前から開催当日まで
+            // 開催13日前から当日
             else {
                 message +=
                     "<div class='status-card status-red'>" +
@@ -178,7 +178,7 @@
             resultArea.innerHTML = message;
         }
 
-        // Enterキーでも操作できるようにする
+        // Enterキーで操作
         document.addEventListener(
             "DOMContentLoaded",
             function () {
@@ -307,6 +307,8 @@
             margin-bottom: 5px;
         }
 
+        /* 目次 */
+
         .menu-card {
             background-color: #f8fbff;
             border: 1px solid #d9e8ff;
@@ -340,13 +342,17 @@
                 transform 0.2s;
         }
 
+        .menu-link:link,
         .menu-link:visited {
             color: #0066cc;
+            text-decoration: none;
         }
 
-        .menu-link:hover {
+        .menu-link:hover,
+        .menu-link:focus {
             background-color: #eef6ff;
-            color: #0050a0;
+            color: #004f9e;
+            text-decoration: none;
             transform: translateY(-1px);
         }
 
@@ -377,64 +383,66 @@
             border-color: #0066cc;
         }
 
+        /* 通常ボタン */
+
         button,
         .button {
             display: block;
             width: 100%;
             min-height: 52px;
-            background-color: #0066cc;
-            color: #ffffff !important;
             border: none;
             border-radius: 12px;
             padding: 14px 18px;
             font-size: 18px;
             font-weight: bold;
             text-align: center;
-            text-decoration: none !important;
+            text-decoration: none;
             cursor: pointer;
             transition:
                 background-color 0.2s,
                 transform 0.2s;
         }
 
-        button:hover,
-        .button:hover {
-            background-color: #0050a0;
-            color: #ffffff !important;
-            text-decoration: none !important;
-            transform: translateY(-1px);
+        button {
+            background-color: #0066cc;
+            color: #ffffff;
         }
 
-        .button:visited,
-        .button:active,
-        .button:focus {
-            color: #ffffff !important;
-            text-decoration: none !important;
+        button:hover,
+        button:focus {
+            background-color: #0050a0;
+            transform: translateY(-1px);
         }
 
         /*
          * 申込手順ボタン
-         * 文字色を必ず白にする
+         * 通常、訪問済み、マウス操作時も白文字
          */
-        .button-secondary,
-        a.button-secondary,
-        a.button-secondary:link,
-        a.button-secondary:visited,
-        a.button-secondary:hover,
-        a.button-secondary:active,
-        a.button-secondary:focus {
-            color: #ffffff !important;
-            text-decoration: none !important;
+
+        a.application-button,
+        a.application-button:link,
+        a.application-button:visited,
+        a.application-button:hover,
+        a.application-button:focus,
+        a.application-button:active {
+            display: block;
+            width: 100%;
+            min-height: 52px;
+            background-color: #008651;
+            color: #ffffff;
+            text-decoration: none;
+            text-align: center;
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
         }
 
-        .button-secondary,
-        a.button-secondary {
-            background-color: #008651 !important;
-        }
-
-        .button-secondary:hover,
-        a.button-secondary:hover {
-            background-color: #006f43 !important;
+        a.application-button:hover,
+        a.application-button:focus {
+            background-color: #006f43;
+            color: #ffffff;
+            transform: translateY(-1px);
         }
 
         #content {
@@ -494,6 +502,7 @@
             color: #666666;
             font-size: 14px;
             margin-top: 12px;
+            margin-bottom: 0;
         }
 
         .footer {
@@ -535,7 +544,8 @@
             }
 
             button,
-            .button {
+            .button,
+            a.application-button {
                 font-size: 17px;
             }
 
@@ -712,7 +722,7 @@
 
         </section>
 
-        <!-- キャンセル -->
+        <!-- 申込キャンセル -->
         <section
             class="card"
             id="cancel"
