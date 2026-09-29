@@ -6,6 +6,9 @@
 管理者
 ・松田
 
+パスワード
+hokuriku
+
 更新手順
 1. index.htmlを編集
 2. Commit changes
